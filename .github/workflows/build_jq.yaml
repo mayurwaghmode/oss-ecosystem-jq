@@ -1,0 +1,66 @@
+name: Build jq for Power
+
+on:
+  workflow_call:
+    inputs:
+      release:
+        required: true
+        type: string
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+
+    steps:
+      - uses: actions/checkout@v2  
+      - uses: uraimo/run-on-arch-action@v2.2.0
+        name: Install dependencies and build jq
+        id: build
+        with:
+          arch: ppc64le
+          distro: ubuntu20.04
+          
+          # Create an artifacts directory
+          setup: |
+            mkdir -p "${PWD}/artifacts"
+          
+          # Mount the artifacts directory as /artifacts in the container
+          dockerRunArgs: |
+            --volume "${PWD}/artifacts:/artifacts"
+            
+      
+          run: |            
+            apt-get update -y
+            rm -rf /usr/local/go && tar -C /usr/local -xzf go1.19.1.linux-amd64.tar.gz
+            export PATH=$PATH:/usr/local/go/bin
+            go version
+            apt-get install make, git
+            git clone https://github.com/stedolan/jq.git
+            cd jq
+            
+            #Building jq
+            git submodule update --init
+            autoreconf -fi 
+            ./configure --with-oniguruma=builtin
+            make -j8
+            make check
+            
+            JQ_PATH=$(find /root/jq -name "jq*")
+            JQ_NAME=$(basename $(find /root/jq/ -name "jq*"))
+            echo $JQ_PATH
+            echo $JQ_NAME
+            cp $JQ_PATH /artifacts/$JQ_NAME
+            ls /artifacts/            
+                      
+      - name: Create Release
+        id: create_release
+        uses: ncipollo/release-action@v1
+        with:
+          tag: ${{ inputs.release }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          allowUpdates: true
+          artifacts: ./artifacts/jq-${{ inputs.release }}-linuxppc64le
+          name: ${{ inputs.release }}
+          replacesArtifacts: true
+          draft: false
+          prerelease: false
