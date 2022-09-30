@@ -2,11 +2,7 @@ name: Build jq for Power
 
 on:
   workflow_call:
-    inputs:
-      release:
-        required: true
-        type: string
-
+    
 jobs:
   build:
     runs-on: ubuntu-20.04
@@ -35,8 +31,9 @@ jobs:
             export PATH=$PATH:/usr/local/go/bin
             go version
             apt-get install make, git
-            git clone https://github.com/stedolan/jq.git
-            cd jq
+            wget https://github.com/stedolan/jq/archive/refs/tags/jq-1.6.tar.gz
+            tar -xvf jq-1.6.tar.gz
+            cd jq-jq-1.6
             
             #Building jq
             git submodule update --init
@@ -56,11 +53,10 @@ jobs:
         id: create_release
         uses: ncipollo/release-action@v1
         with:
-          tag: ${{ inputs.release }}
           token: ${{ secrets.GITHUB_TOKEN }}
           allowUpdates: true
-          artifacts: ./artifacts/jq-${{ inputs.release }}-linuxppc64le
-          name: ${{ inputs.release }}
+          artifacts: jq
+          name: jq-ppc64le
           replacesArtifacts: true
           draft: false
           prerelease: false
