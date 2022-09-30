@@ -27,7 +27,8 @@ jobs:
       
           run: |            
             apt-get update -y
-            apt-get install wget make
+            apt-get install wget -y
+            apt-get install make -y
             wget https://go.dev/dl/go1.19.1.linux-ppc64le.tar.gz
             rm -rf /usr/local/go && tar -C /usr/local -xzf go1.19.1.linux-ppc64le.tar.gz
             export PATH=$PATH:/usr/local/go/bin
