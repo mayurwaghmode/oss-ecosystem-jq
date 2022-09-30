@@ -29,11 +29,11 @@ jobs:
             apt-get update -y
             apt-get install wget -y
             apt-get install make -y
+            apt-get install git -y
             wget https://go.dev/dl/go1.19.1.linux-ppc64le.tar.gz
             rm -rf /usr/local/go && tar -C /usr/local -xzf go1.19.1.linux-ppc64le.tar.gz
             export PATH=$PATH:/usr/local/go/bin
             go version
-            apt-get install make
             wget https://github.com/stedolan/jq/archive/refs/tags/jq-1.6.tar.gz
             tar -xvf jq-1.6.tar.gz
             cd jq-jq-1.6
