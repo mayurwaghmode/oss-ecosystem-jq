@@ -1,4 +1,4 @@
-name: Check for new Grpc release
+name: Check for new jq release
 
 on:
   push:
@@ -11,13 +11,10 @@ jobs:
     
     outputs:
       latest-release: ${{ steps.latest.outputs.LATEST_RELEASE }}
-      current-release: ${{ steps.current.outputs.CURRENT_RELEASE }}
 
     steps:
       - uses: actions/checkout@v2
           
   build-new-release:
     needs: [check-release]
-    uses: ./.github/workflows/build_grpc.yaml
-    with:
-      release: ${{ needs.check-release.outputs.latest-release }}
+    uses: ./.github/workflows/build_jq.yaml
