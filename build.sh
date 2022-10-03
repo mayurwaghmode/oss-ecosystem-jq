@@ -2,9 +2,8 @@ wget https://go.dev/dl/go1.19.1.linux-ppc64le.tar.gz
 rm -rf /usr/local/go && tar -C /usr/local -xzf go1.19.1.linux-ppc64le.tar.gz
 export PATH=$PATH:/usr/local/go/bin
 go version
-wget https://github.com/stedolan/jq/archive/refs/tags/jq-1.6.tar.gz
-tar -xvf jq-1.6.tar.gz
-cd jq-jq-1.6            
+git clone https://github.com/stedolan/jq.git
+cd jq         
 
 #Building jq            
 git submodule update --init
