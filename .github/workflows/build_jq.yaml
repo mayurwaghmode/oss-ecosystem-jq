@@ -1,7 +1,9 @@
 name: Build jq for Power
 
 on:
-  workflow_call:
+  push:
+    tags:
+    - '*'
     
 jobs:
   build:
