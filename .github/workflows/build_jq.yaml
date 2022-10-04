@@ -1,9 +1,7 @@
 name: Build jq for Power
 
 on:
-  push:
-    tags:
-    - '*'
+  workflow_call:
     
 jobs:
   build:
@@ -45,6 +43,7 @@ jobs:
             #echo $JQ_PATH
             #echo $JQ_NAME
             cp jq /artifacts/
+            $TAG=1.6
             ls /artifacts/            
                       
       - name: Create Release
