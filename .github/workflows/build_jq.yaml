@@ -35,12 +35,13 @@ jobs:
             #Building jq
             chmod +x ./build.sh
             source ./build.sh
-            
-            JQ_PATH=$(find /root/jq -name "jq*")
-            JQ_NAME=$(basename $(find /root/jq/ -name "jq*"))
-            echo $JQ_PATH
-            echo $JQ_NAME
-            cp $JQ_PATH /artifacts/$JQ_NAME
+            ls
+            echo '::set-output name=RELEASE::'$TAG
+            #JQ_PATH=$(find /root/jq -name "jq*")
+            #JQ_NAME=$(basename $(find /root/jq/ -name "jq*"))
+            #echo $JQ_PATH
+            #echo $JQ_NAME
+            #cp $JQ_PATH /artifacts/$JQ_NAME
             ls /artifacts/            
                       
       - name: Create Release
