@@ -22,6 +22,7 @@ jobs:
           GE_LATEST=1.6
           echo '::set-output name=LATEST_RELEASE::'$GE_LATEST
           echo "Latest JQ version: "$GE_LATEST
+          echo "Latest JQ version: "${{ needs.check-release.outputs.latest-release }}
   build-new-release:
     uses: ./.github/workflows/build_jq.yaml
     with:
