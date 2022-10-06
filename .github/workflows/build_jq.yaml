@@ -45,7 +45,8 @@ jobs:
             ls -ltra
             ./jq --version
             cp jq /artifacts/
-            ls -ltra /artifacts/            
+            ls -ltra /artifacts/     
+            ./artifacts/jq --version
                       
       - name: Create Release
         id: create_release
