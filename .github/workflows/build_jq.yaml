@@ -31,6 +31,8 @@ jobs:
             apt-get install make -y
             apt-get install git -y
             apt-get -y install autoconf automake libtool cmake autoconf-archive build-essential
+            apt-get install bison -y
+            apt-get install byacc -y
             
             #Building jq
             chmod +x ./build.sh
