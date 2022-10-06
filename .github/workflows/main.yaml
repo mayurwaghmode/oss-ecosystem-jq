@@ -14,7 +14,15 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+      
+      - name: Get latest jq release
+        id: latest
+        run: |
           
+          GE_LATEST=1.6
+          echo '::set-output name=LATEST_RELEASE::'$GE_LATEST
+          echo "Latest JQ version: "$GE_LATEST
   build-new-release:
-    needs: [check-release]
     uses: ./.github/workflows/build_jq.yaml
+    with:
+      release: ${{ needs.check-release.outputs.latest-release }}
