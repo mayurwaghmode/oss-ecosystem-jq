@@ -54,7 +54,7 @@ jobs:
           tag: ${{ inputs.release }}
           token: ${{ secrets.GITHUB_TOKEN }}
           allowUpdates: true
-          artifacts: jq
+          artifacts: ./artifacts/jq
           name: ${{ inputs.release }}
           replacesArtifacts: true
           draft: false
