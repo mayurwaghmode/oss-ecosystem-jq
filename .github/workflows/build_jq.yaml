@@ -55,6 +55,7 @@ jobs:
         id: create_release
         uses: ncipollo/release-action@v1
         with:
+          tag: ${{ inputs.release }}
           token: ${{ secrets.GITHUB_TOKEN }}
           allowUpdates: true
           artifacts: jq
