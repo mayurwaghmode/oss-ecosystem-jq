@@ -45,7 +45,7 @@ jobs:
             #echo $JQ_PATH
             #echo $JQ_NAME
             cp jq /artifacts/
-            $TAG=1.6
+            TAG=1.6
             ls /artifacts/            
                       
       - name: Create Release
