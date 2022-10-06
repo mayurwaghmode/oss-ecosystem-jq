@@ -29,7 +29,8 @@ jobs:
             --volume "${PWD}/artifacts:/artifacts"
             
       
-          run: |            
+          run: |     
+            echo ${{ inputs.release }}
             apt-get update -y
             apt-get install wget -y
             apt-get install make -y
