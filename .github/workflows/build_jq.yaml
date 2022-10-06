@@ -13,7 +13,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2  
-      - uses: uraimo/run-on-arch-action@v2.2.0
+      - uses: uraimo/run-on-arch-action@v2.1.1
         name: Install dependencies and build jq
         id: build
         with:
@@ -30,7 +30,7 @@ jobs:
             
       
           run: |     
-            echo ${{ inputs.release }}
+            echo "Prining the image version: "${{ inputs.release }}
             apt-get update -y
             apt-get install wget -y
             apt-get install make -y
@@ -44,11 +44,6 @@ jobs:
             source ./build.sh
             ls
             ./jq --version
-            #echo '::set-output name=RELEASE::'$TAG
-            #JQ_PATH=$(find /root/jq -name "jq*")
-            #JQ_NAME=$(basename $(find /root/jq/ -name "jq*"))
-            #echo $JQ_PATH
-            #echo $JQ_NAME
             cp jq /artifacts/
             ls /artifacts/            
                       
