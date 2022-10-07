@@ -45,9 +45,8 @@ jobs:
             pwd
             ls -ltra
             ./jq --version
-            cp jq /artifacts/jq
-            ls -ltra /artifacts/jq
-            /artifacts/jq --version
+            cp jq /artifacts/jq-${{ inputs.release }}
+            ls -ltra /artifacts/
                       
       - name: Create Release
         id: create_release
@@ -56,7 +55,7 @@ jobs:
           tag: ${{ inputs.release }}
           token: ${{ secrets.GITHUB_TOKEN }}
           allowUpdates: true
-          artifacts: ./artifacts/jq
+          artifacts: ./artifacts/jq-${{ inputs.release }}
           name: ${{ inputs.release }}
           replacesArtifacts: true
           draft: false
