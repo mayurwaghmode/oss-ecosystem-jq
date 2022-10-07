@@ -42,11 +42,12 @@ jobs:
             #Building jq
             chmod +x ./build.sh
             source ./build.sh
+            pwd
             ls -ltra
             ./jq --version
-            cp jq /artifacts/
-            ls -ltra /artifacts/     
-            ./artifacts/jq --version
+            cp jq/jq /artifacts/jq
+            ls -ltra /artifacts/jq
+            /artifacts/jq --version
                       
       - name: Create Release
         id: create_release
